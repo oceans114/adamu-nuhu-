@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADAMU NUHU | Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --text: #12131a;
+      --muted: #6c7188;
+      --accent: #ff7f5c;
+      --accent-soft: rgba(255, 127, 92, 0.16);
+      --border: #f2f3f8;
+      --shadow: 0 24px 80px rgba(17, 20, 53, 0.08);
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg,
+    canvas {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 0 20px;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .button-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 18px 40px rgba(255, 111, 64, 0.18);
+      width: fit-content;
+      white-space: nowrap;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+      padding: 60px 0 80px;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3rem, 4vw, 4.2rem);
+      line-height: 0.95;
+      margin: 0 0 24px;
+    }
+
+    .hero-copy p {
+      margin: 0 0 28px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 420px;
+      border-radius: 36px;
+      background: radial-gradient(circle at top left, rgba(255,111,64,0.16), transparent 24%),
+                  radial-gradient(circle at bottom right, rgba(58, 121, 255, 0.12), transparent 29%),
+                  linear-gradient(180deg, #ffffff 0%, #fff8f2 100%);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-photo-card {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      width: min(260px, 58%);
+      z-index: 2;
+    }
+
+    .hero-photo-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+      border: 6px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-visual::before,
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      width: 140%;
+      height: 140%;
+      transform: translate(-50%, -40%) rotate(18deg);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 111, 64, 0.25), transparent 34%);
+      filter: blur(42px);
+      opacity: 0.9;
+    }
+
+    .hero-visual::after {
+      top: 48%;
+      width: 120%;
+      height: 120%;
+      transform: translate(-50%, -45%) rotate(-9deg);
+      background: radial-gradient(circle at 65% 40%, rgba(56, 188, 255, 0.28), transparent 32%);
+      opacity: 0.85;
+    }
+
+    .hero-wave {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.75), transparent 20%),
+                  radial-gradient(circle at 80% 30%, rgba(255,255,255,0.88), transparent 14%);
+      overflow: hidden;
+    }
+
+    .hero-wave svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-wave svg path {
+      fill: rgba(255, 111, 64, 0.22);
+    }
+
+    .hero-wave svg path:nth-child(2) {
+      fill: rgba(89, 94, 255, 0.18);
+    }
+
+    .hero-wave svg path:nth-child(3) {
+      fill: rgba(0, 168, 255, 0.22);
+    }
+
+    .section-title {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.8rem;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .who-we-are {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .who-we-are h2 {
+      font-size: clamp(2rem, 2.6vw, 3rem);
+      margin: 0 0 16px;
+      letter-spacing: -0.04em;
+    }
+
+    .who-we-are p {
+      margin: 0 0 20px;
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .info-card {
+      padding: 22px 24px;
+      border-radius: 26px;
+      background: rgba(255, 111, 64, 0.06);
+      border: 1px solid rgba(255, 111, 64, 0.14);
+      color: var(--text);
+    }
+
+    .info-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .footer-note {
+      margin-top: 42px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-section {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .contact-card,
+    .signup-card {
+      padding: 28px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h3,
+    .signup-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+    }
+
+    .contact-card p,
+    .signup-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .signup-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signup-form input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font: inherit;
+      background: #fff8f2;
+    }
+
+    .signup-form button {
+      border: 0;
+      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(255, 111, 64, 0.18);
+    }
+
+    .signup-status {
+      display: none;
+      margin-top: 8px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 111, 64, 0.1);
+      color: #9c4526;
+      font-weight: 600;
+    }
+
+    .qr-section {
+      margin-top: 48px;
+    }
+
+    .qr-card {
+      padding: 28px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      max-width: 360px;
+    }
+
+    .qr-card .qr-code {
+      width: 100%;
+      display: grid;
+      place-items: center;
+      padding: 18px 0;
+      background: var(--accent-soft);
+      border-radius: 22px;
+      margin: 18px 0 0;
+    }
+
+    .qr-card canvas {
+      width: min(220px, 100%);
+      height: auto;
+      aspect-ratio: 1;
+    }
+
+    .qr-caption {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual,
+      .who-we-are {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 24px 18px 48px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 14px 18px;
+        width: 100%;
+      }
+
+      .hero {
+        gap: 28px;
+        padding: 40px 0 56px;
+      }
+
+      .hero-copy h1 {
+        font-size: 3rem;
+      }
+
+      .hero-visual {
+        min-height: 300px;
+      }
+
+      .who-we-are,
+      .contact-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .contact-card,
+      .signup-card,
+      .qr-card {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .logo {
+        letter-spacing: 0.16em;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .button-primary {
+        width: 100%;
+      }
+
+      .hero-copy h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero-copy p {
+        font-size: 1rem;
+      }
+
+      .info-card,
+      .signup-form input {
+        padding: 14px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="logo">ADAMU NUHU</div>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#training">Training</a>
+        <a href="#contact">Contact</a>
+        <a href="#signup" class="button-primary">Sign Up</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <div class="section-title">Gymnastics Portfolio</div>
+        <h1>WELCOME TO ADAMU NUHU</h1>
+        <p>ADAMU NUHU is an elite gymnastics studio focused on strength, grace, and performance. We help athletes build routines, master movement, and reach their highest competitive potential.</p>
+        <a href="#signup" class="button-primary">Continue Sign Up</a>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-photo-card">
+          <img src="20250225_052058.jpg" alt="Portrait of Adamu Nuhu" />
+        </div>
+        <div class="hero-wave">
+          <svg viewBox="0 0 800 600" preserveAspectRatio="none">
+            <path d="M0,260 C180,340 280,140 420,190 C540,240 620,320 800,280 L800,600 L0,600 Z"></path>
+            <path d="M0,330 C120,260 240,430 400,380 C560,330 620,260 800,330 L800,600 L0,600 Z"></path>
+            <path d="M0,190 C180,220 300,100 440,150 C560,185 660,270 800,230 L800,600 L0,600 Z"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="who-we-are" id="portfolio">
+      <div>
+        <div class="section-title">Who we are</div>
+        <h2>Performance through movement</h2>
+      </div>
+      <div>
+        <p>At ADAMU NUHU, we bring modern gymnastics storytelling to every athlete. Our portfolio highlights training programs, artistic routines, and competition-ready choreography designed for balance, power, and confidence.</p>
+        <div class="info-list">
+          <div class="info-card">
+            <strong>Elite routines</strong>
+            Crafted stage-ready gymnastics sequences that blend technical skill with elegant flow.
+          </div>
+          <div class="info-card">
+            <strong>Training programs</strong>
+            Personalized coaching designed for flexibility, strength, and competitive readiness.
+          </div>
+          <div class="info-card">
+            <strong>Performance styling</strong>
+            Fresh visual direction for gymnasts seeking standout presentation and confidence.
+          </div>
+        </div>
+        <p class="footer-note">ADAMU NUHU is built for gymnasts, coaches, and performers who want a beautiful, modern identity and inspiring training journey.</p>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="contact-card">
+        <div class="section-title">Contact</div>
+        <h3>Reach the ADAMU NUHU team</h3>
+        <p>Call us for coaching details, class availability, or to continue your registration.</p>
+        <div class="contact-list">
+          <span>Phone: 09125661569</span>
+          <span>Email: adamsocean8@gmail.com</span>
+        </div>
+      </div>
+
+      <div class="contact-card" id="signup">
+        <div class="section-title">Sign up</div>
+        <h3>Continue your registration</h3>
+        <p>Share your details and we’ll follow up with your next steps.</p>
+        <form class="signup-form" id="signup-form">
+          <input type="text" placeholder="Your name" required />
+          <input type="email" placeholder="Your email" optional />
+          <input type="tel" placeholder="09125661569" required />
+          <button type="submit">Start Registration</button>
+        </form>
+        <div class="signup-status" id="signup-status" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="qr-section">
+        <div class="qr-card">
+          <div class="section-title">Scan to save</div>
+          <p class="qr-caption">Use your phone camera to scan this QR code and access ADAMU NUHU registration details instantly.</p>
+          <div class="qr-code">
+            <canvas id="qr-canvas" width="220" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const signupForm = document.getElementById('signup-form');
+    const signupStatus = document.getElementById('signup-status');
+
+    if (signupForm && signupStatus) {
+      signupForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const nameInput = signupForm.querySelector('input[type="text"]');
+        const name = nameInput ? nameInput.value.trim() : '';
+        signupStatus.textContent = name
+          ? `Thanks, ${name}! We’ll contact you shortly.`
+          : 'Thanks! We’ll contact you shortly.';
+        signupStatus.style.display = 'block';
+        signupForm.reset();
+      });
+    }
+
+    const qrCanvas = document.getElementById('qr-canvas');
+    if (qrCanvas && qrCanvas.getContext) {
+      const ctx = qrCanvas.getContext('2d');
+      const size = 220;
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = '#ffffff';
+      for (let x = 20; x < size - 20; x += 20) {
+        for (let y = 20; y < size - 20; y += 20) {
+          if ((x + y) % 40 === 0 || Math.random() > 0.65) {
+            ctx.fillRect(x, y, 14, 14);
+          }
+        }
+      }
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(10, 10, 50, 50);
+      ctx.fillRect(size - 60, 10, 50, 50);
+      ctx.fillRect(10, size - 60, 50, 50);
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(18, 18, 34, 34);
+      ctx.fillRect(size - 52, 18, 34, 34);
+      ctx.fillRect(18, size - 52, 34, 34);
+    }
+  </script>
+</body>
+</html>
